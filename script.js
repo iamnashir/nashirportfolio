@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timelineItems.forEach((item, index) => {
         gsap.from(item, {
             opacity: 0,
-            x: index % 2 === 0 ? -100 : 100,
+            x: index % 2 === 0 ? -50 : 50,
             duration: 1,
             ease: 'power2.out',
             scrollTrigger: {
@@ -155,5 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.3,
             ease: 'power2.out'
         });
+    });
+
+    // Toggle mobile menu
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
     });
 });
