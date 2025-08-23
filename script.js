@@ -173,6 +173,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Animate social links on hover
+    const socialLinks = document.querySelectorAll('.social-links a');
+    if (socialLinks) {
+        socialLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                gsap.to(link, {
+                    scale: 1.2,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+            link.addEventListener('mouseleave', () => {
+                gsap.to(link, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+        });
+    }
+
     // Toggle mobile menu
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
