@@ -211,23 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Back to Top Button
-    const backToTop = document.querySelector('.back-to-top');
-    if (backToTop) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 200) {
-                backToTop.style.display = 'block';
-                gsap.to(backToTop, { opacity: 1, duration: 0.3 });
-            } else {
-                gsap.to(backToTop, { opacity: 0, duration: 0.3, onComplete: () => backToTop.style.display = 'none' });
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            gsap.to(window, { scrollTo: 0, duration: 1, ease: 'power2.out' });
-        });
-    }
-
     // Fade in footer
     const footer = document.querySelector('footer');
     if (footer) {
@@ -236,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.5,
             scrollTrigger: {
                 trigger: footer,
-                start: 'top 80%',
+                start: 'top 90%',
                 toggleActions: 'play none none reverse'
             }
         });
