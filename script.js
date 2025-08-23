@@ -2,6 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // GSAP Scroll Animations
     gsap.registerPlugin(ScrollTrigger);
 
+    // Loader Animation and Removal
+    const loader = document.querySelector('.loader');
+    if (loader) {
+        gsap.to(loader, {
+            opacity: 0,
+            duration: 1,
+            onComplete: () => {
+                if (loader.parentNode) loader.parentNode.removeChild(loader);
+            }
+        });
+    }
+
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
         gsap.to(section, {
@@ -132,35 +144,72 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Basic form submission handling (for demo purposes)
+    // Basic form submission handling
     const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Form submitted! (This is a demo, no data is actually sent.)');
-        contactForm.reset();
-    });
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Form submitted! (This is a demo, no data is actually sent.)');
+            contactForm.reset();
+        });
+    }
 
     // Animate CV button on hover
     const cvButton = document.querySelector('.cv-button');
-    cvButton.addEventListener('mouseenter', () => {
-        gsap.to(cvButton, {
-            scale: 1.05,
-            duration: 0.3,
-            ease: 'power2.out'
+    if (cvButton) {
+        cvButton.addEventListener('mouseenter', () => {
+            gsap.to(cvButton, {
+                scale: 1.05,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
         });
-    });
-    cvButton.addEventListener('mouseleave', () => {
-        gsap.to(cvButton, {
-            scale: 1,
-            duration: 0.3,
-            ease: 'power2.out'
+        cvButton.addEventListener('mouseleave', () => {
+            gsap.to(cvButton, {
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
         });
-    });
+    }
 
     // Toggle mobile menu
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Back to Top Button
+    const backToTop = document.querySelector('.back-to-top');
+    if (backToTop) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 200) {
+                backToTop.style.display = 'block';
+                gsap.to(backToTop, { opacity: 1, duration: 0.3 });
+            } else {
+                gsap.to(backToTop, { opacity: 0, duration: 0.3, onComplete: () => backToTop.style.display = 'none' });
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            gsap.to(window, { scrollTo: 0, duration: 1, ease: 'power2.out' });
+        });
+    }
+
+    // Fade in footer
+    const footer = document.querySelector('footer');
+    if (footer) {
+        gsap.from(footer, {
+            opacity: 0,
+            duration: 0.5,
+            scrollTrigger: {
+                trigger: footer,
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+    }
 });
