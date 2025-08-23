@@ -179,6 +179,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            if (dropdownContent) {
+                if (navLinks.classList.contains('active')) {
+                    dropdownContent.style.display = 'block';
+                } else {
+                    dropdownContent.style.display = 'none';
+                }
+            }
         });
     }
 
